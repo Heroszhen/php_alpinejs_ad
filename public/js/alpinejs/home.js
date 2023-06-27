@@ -12,12 +12,13 @@ document.addEventListener('alpine:init', () => {
             document.addEventListener('scroll', async (e) => {
                 let documentHeight = document.body.scrollHeight;
                 let currentScroll = e.target.scrollingElement.scrollTop + window.innerHeight;
-                if (currentScroll > documentHeight) {
-                    console.log('You are at the bottom!')
+                if (currentScroll - 5 > documentHeight) {
+                    console.log('You are at the bottom!', this.locked)
                     if (this.locked === false) {
-                        await wait(1);
+                        this.locked = true;
                         this.id--;
                         if (this.id > 0) await this.getPhotos();
+                        else this.locked = false;
                     }
                 }
             })
@@ -29,7 +30,6 @@ document.addEventListener('alpine:init', () => {
                 this.photos = this.photos.concat(res["data"]);
                 this.id = parseInt(this.photos[this.photos.length - 1]["id"]);
                 await this.resetColumns();
-                await wait(1);
                 this.locked = false;
             }
             this.locked = false;
