@@ -1,0 +1,21 @@
+SQLite supports these datatypes: Blob, Integer, Null, Text, Real.
+
+
+---oenssl
+openssl_get_cipher_methods()
+
+---phpDocumentor
+https://pear.php.net/package/PhpDocumentor/docs/latest/phpDocumentor/tutorial_tags.param.pkg.html
+
+---template
+1.admin
+https://dash-ui-admin-template.vercel.app/
+
+2.admin photos
+https://www.cnblogs.com/cq1715584439/p/11256433.html
+
+3.site 
+https://www.pinterest.fr/
+
+---sqlite 
+UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'table_name';

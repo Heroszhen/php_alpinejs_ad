@@ -1,0 +1,247 @@
+img {
+    width: 100%;
+    height: auto;
+}
+
+a,
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.full-width {
+    width: 100% !important;
+}
+
+.full-height {
+    height: 100vh !important;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+@media (max-width:767px) {
+    thead {
+        display: none;
+    }
+
+    tr {
+        border-bottom: 3px solid black;
+    }
+
+    tr,
+    th,
+    td {
+        display: block;
+        width: 100%;
+    }
+}
+
+
+#login>div {
+    overflow: hidden;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login img {
+    width: 100%;
+    height: auto;
+}
+
+#login form {
+    width: 70%;
+}
+
+@media (max-width:767px) {
+    #login {
+        position: relative;
+    }
+
+    #login h1 {
+        color: rgba(255, 255, 255, .5);
+    }
+
+    #login>div {
+        width: 100%;
+        height: 100vh;
+    }
+
+    #login>div:nth-child(2) {
+        position: absolute;
+        z-index: -1;
+    }
+
+    #login input {
+        background: transparent;
+    }
+
+    #login label,
+    #login input::placeholder {
+        font-weight: bold;
+        color: gray;
+    }
+
+    #login img {
+        height: 100%;
+        width: auto;
+    }
+}
+
+
+/*nav*/
+.under-mnav {
+    padding-top: 80px;
+}
+
+#m-nav {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    padding: 4px 16px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 8px -8px;
+    overflow: hidden;
+    overflow-x: auto;
+    background-color: white;
+}
+
+#m-nav>.wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    min-width: 767px;
+}
+
+#home .wrap-photos {
+    display: flex;
+}
+
+#m-nav>.wrap .menu {
+    margin-right: 5px;
+}
+
+#m-nav>.wrap a {
+    display: block;
+    padding: 10px 16px;
+    border-radius: 24px;
+}
+
+#m-nav>.wrap a.active {
+    background: black;
+    color: white;
+}
+
+#m-nav>.wrap .menu a:hover {
+    background-color: gainsboro;
+}
+
+#m-nav>.wrap img#profile-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+
+/*pinterest*/
+.pinterest {
+    z-index: 5px;
+    min-height: 100vh;
+}
+
+
+
+/*admin*/
+.admin {
+    background: #f1f5f9 !important;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.admin #admin-top-nav {
+    height: 60px;
+    padding: 0.625rem 1.5rem;
+    display: flex;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 20, .08), 0 1px 2px rgba(0, 0, 20, .08);
+}
+
+.admin #admin-top-nav>div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.admin #admin-top-nav #btn-admin-right-nav {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.admin #admin-right-nav {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    margin-left: -300px;
+    width: 250px;
+    height: 100vh;
+    background-color: #212b36;
+    border-right: 1px solid #212b36;
+    transition: .5s;
+    color: white;
+    overflow: hidden;
+}
+
+.admin #admin-right-nav.opened {
+    margin-left: 0;
+}
+
+.admin #admin-right-nav>div {
+    padding: 0.5rem 1.5rem;
+}
+
+.admin #admin-right-nav #btn-admin-right-nav2 {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.admin #admin-right-nav .menu {
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    display: block;
+    color: #454f5b;
+    font-size: 25px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.admin #admin-right-nav .menu.active {
+    color: white;
+}
+
+.admin .admin-content {
+    padding: 2rem !important;
+}
+
+
+/*admin-users*/
+#admin-users #wrap-form {
+    border: 2px solid black;
+    padding: 20px 10px;
+    border-radius: 10px;
+}
+
+#admin-users table img,
+#admin-photos table img {
+    width: 100px;
+}
