@@ -4,5 +4,6 @@ return [
     "env" => "dev",
     "protocol" => "http",
     "hostname" => "localhost:8000",
-    "jwt_key" => "herozhen"
+    "jwt_key" => "herozhen",
+    "maintenance" => false,
 ];

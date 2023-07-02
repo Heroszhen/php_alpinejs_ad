@@ -43,4 +43,17 @@ class AdminPhotoController extends AbstractController{
 
         $this->json($response);
     }
+
+    public function deletePhoto($id) {
+        $response = [
+            "status" => 1,
+            "data" => null
+        ];
+
+        $request = new Request();
+        $model = $this->getModel(Photo::class);
+        $id = $model->delete($id);
+
+        $this->json($response);
+    }
 }

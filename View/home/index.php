@@ -8,12 +8,17 @@
             <div class="col-12 under-mnav">
                 <div class="wrap-photos" x-ref="wrap_photos">
                     <template x-for="(item, index) in photos">
-                        <img :src="item['url']" alt="" class="d-none">
+                        <img :src="item['url']" alt="" class="d-none"  @dblclick="bigImage=item['url']">
                     </template>
                 </div>
             </div>
         </div>
     </div>
+    <template x-if="bigImage != ''">
+        <section class="wrap-bigimage">
+            <img :src="bigImage" alt="" @dblclick="bigImage=''">
+        </section>
+    </template>
 </section>
 
 <script src="./libs/masonry.js"></script>

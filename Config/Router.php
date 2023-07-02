@@ -19,6 +19,12 @@ class Router{
 
         $this->checkAccess($url);
 
+        if ($_ENV["maintenance"] === true) {
+            if ($url !== "/maintenance") {
+                header("Location: /maintenance");
+            } 
+        } 
+
         $index = $this->searchRoute($method, $url);
         if($index != -1){
             $route = $this->routes[$index];
@@ -67,7 +73,10 @@ class Router{
     {
         $request = new Request();
         if($request->isXmlHttpRequest()) {
-            if($url === "/login" || strpos($url, "/profile") === false){
+            if(
+                strpos($url, "/profile") === false && 
+                strpos($url, "/admin") === false
+            ){
                 return;
             }
             $rights = include dirname(__DIR__).'/Config/security.php';

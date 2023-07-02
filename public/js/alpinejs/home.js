@@ -4,6 +4,7 @@ document.addEventListener('alpine:init', () => {
         photos: [],
         columns: 5,
         locked: false,
+        bigImage: "",
         init() {
             this.getPhotos();
             window.addEventListener("resize", (e) => {
@@ -47,7 +48,7 @@ document.addEventListener('alpine:init', () => {
             this.columns = columns;
 
             await wait(1);
-            let masonry = new Masonry(document.querySelector(".wrap-photos"), this.columns, 10);
+            let masonry = new Masonry(document.querySelector(".wrap-photos"), this.columns, 16);
             await masonry.run();
         }
     }));

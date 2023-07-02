@@ -6,15 +6,19 @@ document.addEventListener('alpine:init', () => {
             url: "",
             base64: ""
         },
+        dataTable: null,
         init() {
             isNotConnected();
             this.getAllPhotos();
+            this.dataTable = new DataTable("tablePhotos", 4);
         },
         async getAllPhotos() {
             let res = await fetchGet("/admin/photos/photos", localStorage.getItem('token'));
             if (res["status"] === -1) window.location.href = "/";
             else if (res["status"] === 1) {
                 this.allPhotos = res["data"];
+                await wait(1);
+                this.dataTable.setTotal(this.allPhotos.length);
             }
         },
         async inputFileHandler(e) {
@@ -37,6 +41,8 @@ document.addEventListener('alpine:init', () => {
                 this.allPhotos.push(res["data"]);
                 this.resetPhotoM();
                 alert("Enregistré");
+                await wait(0.5);
+                this.dataTable.setTotal(1);
             }
         },
         resetPhotoM() {
@@ -44,6 +50,16 @@ document.addEventListener('alpine:init', () => {
                 url: "",
                 base64: ""
             };
+        },
+        async deletePhoto(index) {
+            let res = await fetchDelete(`/admin/photos/photo/${this.allPhotos[index]['id']}`, localStorage.getItem('token'));
+            if (res["status"] === -1) window.location.href = "/";
+            else if (res["status"] === 1) {
+                this.allPhotos.splice(index, 1);
+                alert("Enregistré");
+                await wait(0.5);
+                this.dataTable.setTotal(-1);
+            }
         }
     }));
 });

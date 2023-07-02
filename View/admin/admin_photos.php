@@ -15,13 +15,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 h1 fw-bold mb-4">Les photos</div>
-                    <div class="col-md-5 mb-4">
+                    <div class="col-md-4 mb-4">
                         <h4>Ajouter une photo</h4>
                         <form id="form-photo" x-on:submit.prevent="sendForm()" class="row">
                             <div class="col-12 mb-3">
                                 <div class="mb-2">
                                     <label for="lastname" class="form-label">Url</label>
-                                    <input type="text" class="form-control" id="url" x-model="photoM['url']" @change="switchUrl(1)">
+                                    <textarea class="form-control" id="url" x-model="photoM['url']" @change="switchUrl(1)"></textarea>
                                 </div>
                                 <template x-if="photoM['url'] !== ''">
                                     <img :src="photoM['url']" alt="">
@@ -46,9 +46,9 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-8">
                         <div class="wrap-tab1">
-                            <table class="table">
+                            <table class="table" id="tablePhotos">
                                 <thead class="table-dark">
                                     <tr>
                                         <th scope="col">Id</th>
@@ -57,10 +57,6 @@
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
-                            </table>
-                        <div>
-                        <div class="wrap-tab2">
-                            <table class="table table-hover">
                                 <tbody>
                                     <template x-for="(item, index) in allPhotos">
                                         <tr x-show="item['filter']==''">
@@ -70,7 +66,7 @@
                                             </td>
                                             <td x-text="item['created']"></td>
                                             <td>
-                                                <button type="button" class="btn btn-danger btn-sm" @click="deleteuser(index)">Supprimer</button>
+                                                <button type="button" class="btn btn-danger btn-sm" @click="deletePhoto(index)">Supprimer</button>
                                             </td>
                                         </tr>
                                     </template>
@@ -84,6 +80,7 @@
     </section>
 </div>
 
+<script src="../libs/dataTable.js"></script>
 <script src="../js/alpinejs/admin/photos.js"></script>
 <?php
     require_once "../View/footer.php";

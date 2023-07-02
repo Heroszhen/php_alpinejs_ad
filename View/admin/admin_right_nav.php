@@ -14,7 +14,7 @@
     <a class="menu" href="/admin/articles">
         Article
     </a>
-    <a class="menu" href="/admin/videos">
+    <a class="menu <?= $_SERVER["REQUEST_URI"] === '/admin/videos' ? 'active' : '' ?>" href="/admin/videos">
         Video
     </a>
     <div class="menu logout">

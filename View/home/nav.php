@@ -17,7 +17,7 @@
         </template>
         <template x-if="connected == true && profile != null && profile['roles'].includes('role_admin')">
             <div class="menu">
-                <a href="/admin/utilisateurs">Admin</a>
+                <a href="/admin/photos">Admin</a>
             </div>
         </template>
         <template x-if="connected == false">

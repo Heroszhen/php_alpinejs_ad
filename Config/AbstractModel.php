@@ -16,7 +16,7 @@ abstract class AbstractModel{
 		// Sanitize
 		if (!empty($params)){
 			foreach($params as $key => $value){
-				$params[$key] = trim(strip_tags($value));
+				$params[$key] = trim($value);
 			}
 		}
 		

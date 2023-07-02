@@ -19,6 +19,7 @@
     <script defer src="/js/script.js"></script>
     <script src="/js/util.js"></script>
 
+    <link rel="icon" type="image/png" href="/files/favicon.ico">
     <title>Alexandra Daddario</title>
   </head>
   <body>
@@ -26,7 +27,7 @@
       if(
         strpos($_SERVER["REQUEST_URI"], "profil") === false && 
         strpos($_SERVER["REQUEST_URI"], "admin") === false &&
-        !in_array($_SERVER["REQUEST_URI"], ["/login"])
+        !in_array($_SERVER["REQUEST_URI"], ["/login", "/maintenance"])
       )
         {
         require_once "../View/home/nav.php";

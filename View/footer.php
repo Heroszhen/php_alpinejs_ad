@@ -6,7 +6,7 @@
       if(
         strpos($_SERVER["REQUEST_URI"], "profil") === false && 
         strpos($_SERVER["REQUEST_URI"], "admin") === false &&
-        !in_array($_SERVER["REQUEST_URI"], ["/login"])
+        !in_array($_SERVER["REQUEST_URI"], ["/login", "/maintenance"])
       )
         {
     ?>
