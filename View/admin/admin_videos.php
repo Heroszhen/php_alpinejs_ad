@@ -51,6 +51,7 @@
                                         <option value="2">Video</option>
                                         <option value="3">Url externe</option>
                                         <option value="4">TikTok</option>
+                                        <option value="5">Vidéo intégrée</option>
                                     </select>
                                 </div>
                                 <div class="col-6">

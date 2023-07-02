@@ -7,6 +7,8 @@ return [
     ['GET', '/', [], Controller\HomeController::class, "index"],
     ['GET', '/maintenance', [], Controller\HomeController::class, "maintenance"],
     ['GET', '/home/get-photos/', ['\d+'], Controller\HomeController::class, "getPhotos"],
+    ['GET', '/videos', [], Controller\HomeController::class, "videosPage"],
+    ['GET', '/home/get-videos/', ['\d+'], Controller\HomeController::class, "getVideos"],
     ['GET', '/login', [], Controller\SecurityController::class, "login"],
     ['POST', '/login', [], Controller\SecurityController::class, "traitLogin"],
     ['GET', '/profile/profile', [], Controller\SecurityController::class, "getProfilesAfterLogin"],

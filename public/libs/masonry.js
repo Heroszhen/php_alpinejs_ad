@@ -32,7 +32,7 @@ class Masonry {
             let children = this.wrap.childNodes;
             let index;
             let realHeight;
-            children.forEach(async item => {
+            children.forEach(async (item) => {
                 const [imgWidth, imgHeight] = await this.#getImageSize(item.src);
                 item.style.display = "block";
                 item.style.position = "absolute";
@@ -44,7 +44,10 @@ class Masonry {
                 item.style.top = heights[index] + "px";
                 heights[index] += realHeight + this.margin;
                 item.classList.remove("d-none");
+
+                this.wrap.style.height = heights[index] + 50 + "px";
             });
+
 
             resolve(1);
         });

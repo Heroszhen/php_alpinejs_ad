@@ -8,7 +8,7 @@
             <a  class="<?= $_SERVER["REQUEST_URI"] === '/news' ? 'active' : '' ?>">Actualités</a>
         </div>
         <div class="menu">
-            <a class="<?= $_SERVER["REQUEST_URI"] === '/videos' ? 'active' : '' ?>">Vidéos</a>
+            <a href="/videos" class="<?= $_SERVER["REQUEST_URI"] === '/videos' ? 'active' : '' ?>">Vidéos</a>
         </div>
         <template x-if="connected == true && profile != null">
             <div class="menu">

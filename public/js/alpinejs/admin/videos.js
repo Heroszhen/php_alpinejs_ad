@@ -18,7 +18,8 @@ document.addEventListener('alpine:init', () => {
             "iframe": '1',
             "video": "2",
             "url externe": '3',
-            "tiktok": '4'
+            "tiktok": '4',
+            "vidéo intégrée": '5'
         },
         init() {
             isNotConnected();
@@ -92,9 +93,13 @@ document.addEventListener('alpine:init', () => {
                 case '1':
                     return "iframe";
                 case '2':
+                    return "video";
                 case '3':
+                    return "url externe";
                 case '4':
                     return "TikTok";
+                case '5':
+                    return "Vidéo intégrée";
                 default:
             }
         },

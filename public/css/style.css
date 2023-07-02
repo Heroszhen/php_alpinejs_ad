@@ -9,6 +9,12 @@ a:hover {
     text-decoration: none;
 }
 
+iframe,
+video {
+    width: 100%;
+    height: auto;
+}
+
 .full-width {
     width: 100% !important;
 }
@@ -171,14 +177,24 @@ a:hover {
     padding: 5px 10px;
 }
 
-#home .wrap-bigimage img {
+#home .wrap-bigimage-container {
+    position: relative;
+    height: 100%;
+}
+
+#home .wrap-bigimage img#bigImage {
     height: 100%;
     width: auto;
 }
 
 @media (max-width:767px) {
-    #home .wrap-image img {
+    #home .wrap-bigimage-container {
         width: 100%;
+        text-align: center;
+    }
+
+    #home .wrap-bigimage img#bigImage {
+        width: 100% !important;
         height: auto;
     }
 }
@@ -190,11 +206,99 @@ a:hover {
     align-items: center;
 }
 
+#videos .wrap-video {
+    cursor: pointer;
+}
+
+#videos .wrap-image {
+    overflow: hidden;
+    text-align: center;
+}
+
+#videos .wrap-image img {
+    width: auto;
+    height: 100%;
+    border-radius: 16px;
+    transition: .5s;
+}
+
+#videos .wrap-image img:hover {
+    border-radius: 0;
+}
+
+#videos #section-video {
+    position: fixed;
+    z-index: 8888;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: white;
+}
+
+#videos #section-video>#wrap-displayed-video {
+    width: 60%;
+    height: 100%;
+    background-color: rgba(22, 24, 35, 0.6);
+    overflow: hidden;
+}
+
+#videos #section-video>#wrap-comments {
+    width: 40%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px 20px;
+}
+
+#videos #section-video .close-video {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#videos #section-video>#wrap-displayed-video>div {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#videos #section-video .wrap-tiktok iframe {
+    width: 360px !important;
+    height: 95% !important;
+}
+
+#videos #section-video a.wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (max-width:767px) {
+    #videos #section-video {
+        flex-wrap: wrap;
+        height: calc(100vh + 300px);
+        min-height: calc(100vh + 300px);
+        overflow: auto;
+    }
+
+    #videos #section-video>section {
+        width: 100% !important;
+        height: 100vh !important;
+    }
+}
 
 /*pinterest*/
 .pinterest {
-    z-index: 5px;
+    z-index: 5;
     min-height: 100vh;
+    padding-bottom: 10px;
 }
 
 
