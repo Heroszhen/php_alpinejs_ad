@@ -22,11 +22,19 @@ document.addEventListener('alpine:init', () => {
             "vidéo intégrée": '5'
         },
         displayedVideo: null,
+        formValidation: null,
         init() {
             isNotConnected();
             this.getAllVideos();
             this.videoM = new Video();
             this.dataTable = new DataTable("tableVideos", 4);
+            this.formValidation = new FormValidation("form-video");
+            this.formValidation.addValidators([
+                new RequiredValidator("title", "Le titre est obligatoire"),
+                new RequiredValidator("url", "L'url est obligatoire"),
+                new RequiredValidator("thumbnail", "La photo est obligatoire"),
+                new RequiredValidator("type", "Le type est obligatoire")
+            ]);
         },
         async getAllVideos() {
             let res = await fetchGet("/admin/videos/videos", localStorage.getItem('token'));
@@ -44,12 +52,8 @@ document.addEventListener('alpine:init', () => {
             }
         },
         async sendForm() {
-            if (
-                this.videoM["type"] !== "" &&
-                this.videoM["url"] !== "" &&
-                this.videoM["thumbnail"] !== "" &&
-                this.videoM["title"] !== ""
-            ) {
+            this.formValidation.check();
+            if (this.formValidation.checked === true) {
                 if (this.videoM["id"] === null) {
                     let res = await fetchPost("/admin/videos/video", this.videoM, localStorage.getItem('token'));
                     if (res["status"] === -1) window.location.href = "/";
@@ -138,7 +142,10 @@ document.addEventListener('alpine:init', () => {
                 this.displayedVideo = video
             } else {
                 console.log(video)
-                if (video["type"] === '3') window.open(video['url'], '_blank');
+                if (video["type"] === '3') {
+                    window.open(video['url'], '_blank');
+                    return;
+                }
                 else this.displayedVideo = video;
 
                 await wait(1);

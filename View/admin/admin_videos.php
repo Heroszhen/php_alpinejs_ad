@@ -18,25 +18,33 @@
                     <div class="col-md-4 col-lg-3 mb-4">
                         <h4>Ajouter une video</h4>
                         <template x-if="videoM != null">
-                            <form id="form-photo" x-on:submit.prevent="sendForm()" class="row">
+                            <form id="form-video" x-on:submit.prevent="sendForm()" class="row">
                                 <div class="col-12 mb-3">
                                     <div class="mb-2">
                                         <label for="title" class="form-label">Titre*</label>
-                                        <input class="form-control mb-2" type="text" id="title" x-model="videoM['title']">
+                                        <input class="form-control" name="title" type="text" id="title" x-model="videoM['title']">
+                                        <template x-if="formValidation.errors?.title?.required != undefined">
+                                            <div class="alert alert-danger mt-1" x-text="formValidation.errors.title.required"></div>
+                                        </template>
                                     </div>
-                                    
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="mb-2">
                                         <label for="url" class="form-label">Url*</label>
-                                        <textarea class="form-control" id="url" rows="1" x-model="videoM['url']"></textarea>
+                                        <textarea class="form-control" name="url" id="url" rows="1" x-model="videoM['url']"></textarea>
+                                        <template x-if="formValidation.errors?.url?.required != undefined">
+                                            <div class="alert alert-danger mt-1" x-text="formValidation.errors.url.required"></div>
+                                        </template>
                                     </div>
                                 </div> 
                                 <div class="col-12 mb-3">
                                     <div class="mb-2">
                                         <label for="formFile" class="form-label">Vignette*</label>
-                                        <input class="form-control mb-2" type="file" id="formFile" @change="inputFileHandler($event)">
+                                        <input class="form-control" type="file" name="thumbnail" id="formFile" @change="inputFileHandler($event)">
                                     </div>
+                                    <template x-if="formValidation.errors?.thumbnail?.required != undefined">
+                                        <div class="alert alert-danger mt-1" x-text="formValidation.errors.thumbnail.required"></div>
+                                    </template>
                                     <template x-if="videoM['thumbnail'] !== ''">
                                         <div id="wrap-base64">
                                             <img :src="videoM['thumbnail']" alt="">
@@ -45,7 +53,7 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="select-type" class="form-label">Type*</label>
-                                    <select class="form-select" id="select-type" x-model="videoM['type']">
+                                    <select class="form-select" name="type" id="select-type" x-model="videoM['type']">
                                         <option value="">Choisir un type d'url</option>
                                         <option value="1">Iframe</option>
                                         <option value="2">Video</option>
@@ -53,6 +61,9 @@
                                         <option value="4">TikTok</option>
                                         <option value="5">Vidéo intégrée</option>
                                     </select>
+                                    <template x-if="formValidation.errors?.type?.required != undefined">
+                                        <div class="alert alert-danger mt-1" x-text="formValidation.errors.type.required"></div>
+                                    </template>
                                 </div>
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -115,6 +126,7 @@
 </div>
 
 <script src="../libs/dataTable.js"></script>
+<script src="../libs/FormValidation.js"></script>
 <script src="../js/alpinejs/admin/videos.js"></script>
 <?php
     require_once "../View/footer.php";
