@@ -21,6 +21,7 @@ document.addEventListener('alpine:init', () => {
             "tiktok": '4',
             "vidéo intégrée": '5'
         },
+        displayedVideo: null,
         init() {
             isNotConnected();
             this.getAllVideos();
@@ -131,6 +132,25 @@ document.addEventListener('alpine:init', () => {
                 this.allVideos = tmp.concat(tmp2);
                 this.dataTable.setTotal(0);
             }
+        },
+        async setDisplayedVideo(video = null) {
+            if (video === null) {
+                this.displayedVideo = video
+            } else {
+                console.log(video)
+                if (video["type"] === '3') window.open(video['url'], '_blank');
+                else this.displayedVideo = video;
+
+                await wait(1);
+                this.resetVideo();
+                window.addEventListener('resize', async (e) => {
+                    if (!['4', '5'].includes(this.displayedVideo["type"])) this.resetVideo();
+                });
+            }
+        },
+        resetVideo() {
+            let dom = document.querySelector("#section-video iframe")
+            dom.style.height = dom.clientWidth / 1.77 + "px";
         }
     }));
 });

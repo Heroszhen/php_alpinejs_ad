@@ -90,7 +90,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm me-2 mb-1" @click="setVideoM(index)">Modifier</button>
                                                 <button type="button" class="btn btn-danger btn-sm me-2 mb-1" @click="deleteVideo(index)">Supprimer</button>
-                                                <button type="button" class="btn btn-dark btn-sm">Lire</button>
+                                                <button type="button" class="btn btn-dark btn-sm" @click="setDisplayedVideo(item)">Lire</button>
                                             </td>
                                         </tr>
                                     </template>
@@ -101,6 +101,16 @@
                 </div>
             </div>
         </section>
+
+        <template x-if="displayedVideo != null">
+            <section id="section-video" class="full-height d-flex fixed-section">
+                <div class="btn-close text-white fs-4">
+                    <i class="bi bi-arrow-left pointer" @click="setDisplayedVideo(null)"></i>
+                    Retour
+                </div>
+                <div class="wrap" x-html="displayedVideo['url']"></div>
+            </section>
+        </template>
     </section>
 </div>
 

@@ -31,6 +31,14 @@ video {
     cursor: pointer;
 }
 
+.fixed-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+}
+
 @media (max-width:767px) {
     thead {
         display: none;
@@ -390,4 +398,26 @@ video {
     height: 110px;
 }
 
-/*admin-photos*/
+/*admin-videos*/
+#admin-videos #section-video {
+    z-index: 8888;
+    flex-wrap: wrap;
+}
+
+#admin-videos #section-video>div {
+    width: 100%;
+}
+
+
+
+@media (min-width:768px) {
+    #admin-videos #section-video>div:nth-child(2) {
+        padding: 10px 100px;
+    }
+}
+
+@media (min-width:1204px) {
+    #admin-videos #section-video>div:nth-child(2) {
+        padding: 10px 150px;
+    }
+}
