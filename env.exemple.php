@@ -5,5 +5,6 @@ return [
     "protocol" => "",
     "hostname" => "",
     "jwt_key" => "",
-    "maintenance" => false
+    "maintenance" => false,
+    "mk_joliesfilles" => ""
 ];

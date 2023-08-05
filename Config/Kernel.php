@@ -20,9 +20,15 @@ class Kernel{
 
     private function setEnv()
     {
-        $tab = include dirname(__DIR__,1)."/env.php";
-        foreach($tab as $key => $value){
-            $_ENV[$key] = $value;
+        $envs = ["env.local.php", "env.php"];
+        foreach ($envs as $env) {
+            if (file_exists(dirname(__DIR__, 1) . "/{$env}")) {
+                $tab = include dirname(__DIR__, 1)."/env.php";
+                foreach($tab as $key => $value){
+                    $_ENV[$key] = $value;
+                }
+                break;
+            }
         }
     }
 }

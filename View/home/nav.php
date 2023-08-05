@@ -1,6 +1,5 @@
 <?php
-    //$config = include dirname(__DIR__,2).'/Config/Config.php';
-    dd($_ENV);
+
 ?>
 <nav id="m-nav" x-data="mnav">
     <div class="wrap">
@@ -16,7 +15,7 @@
         </div>
         <template x-if="connected == true">
             <div class="menu">
-                <a class="pointer" href="" target="_blank">Jolies Filles</a>
+                <a class="pointer" href="<?= $_ENV['mk_joliesfilles'] ?>" target="_blank">Jolies Filles</a>
             </div>
         </template>
         <template x-if="connected == true && profile != null">
