@@ -1,7 +1,7 @@
 class Video {
     id = null;
     user_id = null;
-    user = null; l
+    user = null;
     type = "";
     url = "";
     thumbnail = "";
@@ -77,6 +77,7 @@ document.addEventListener('alpine:init', () => {
         resetForm() {
             this.videoM = new Video();
             this.elmindex = null;
+            this.$refs.inputFile.value = null;
         },
         async deleteVideo(index) {
             if (!window.confirm("Voulez-vous supprimer cette vidéo ?")) return;
@@ -141,7 +142,6 @@ document.addEventListener('alpine:init', () => {
             if (video === null) {
                 this.displayedVideo = video
             } else {
-                console.log(video)
                 if (video["type"] === '3') {
                     window.open(video['url'], '_blank');
                     return;

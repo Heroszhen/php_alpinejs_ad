@@ -2,7 +2,7 @@
     require_once "../View/header.php";
 ?>
 
-<section id="login" class="full-height d-flex full-width" x-data="login">
+<section id="login" class="full-height d-flex full-width login-logup" x-data="login">
     <div>
         <form id="form-login" x-on:submit.prevent="sendForm()">
             <h1 class="text-center">Connectez-vous</h1>

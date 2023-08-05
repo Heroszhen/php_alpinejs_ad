@@ -52,6 +52,7 @@ document.addEventListener('alpine:init', () => {
             };
         },
         async deletePhoto(index) {
+            if (!window.confirm('Voulez-vous supprimer cette photo ?')) return;
             let res = await fetchDelete(`/admin/photos/photo/${this.allPhotos[index]['id']}`, localStorage.getItem('token'));
             if (res["status"] === -1) window.location.href = "/";
             else if (res["status"] === 1) {

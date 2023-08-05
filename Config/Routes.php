@@ -12,6 +12,11 @@ return [
     ['GET', '/login', [], Controller\SecurityController::class, "login"],
     ['POST', '/login', [], Controller\SecurityController::class, "traitLogin"],
     ['GET', '/profile/profile', [], Controller\SecurityController::class, "getProfilesAfterLogin"],
+    ['GET', '/logup', [], Controller\SecurityController::class, "logup"],
+    ['POST', '/logup', [], Controller\SecurityController::class, "traitLogup"],
+    ['GET', '/profil', [], Controller\UserController::class, "displayProfil"],
+    ['GET', '/profile/user', [], Controller\UserController::class, "getUser"],
+    ['POST', '/profile/user', [], Controller\UserController::class, "editUser"],
     ['GET', '/admin/utilisateurs', [], Admin\AdminUserController::class, "index"],
     ['GET', '/admin/users', [], Admin\AdminUserController::class, "getAllUsers"],
     ['POST', '/admin/users/user', [], Admin\AdminUserController::class, "editUser"],
@@ -25,5 +30,6 @@ return [
     ['POST', '/admin/videos/video', [], Admin\AdminVideoController::class, "addVideo"],
     ['DELETE', '/admin/videos/video/', ['\d+'], Admin\AdminVideoController::class, "deleteVideo"],
     ['POST', '/admin/videos/video/', ['\d+'], Admin\AdminVideoController::class, "updateVideo"],
+    ['GET', '/admin/articles', [], Admin\AdminArticleController::class, "displayArticles"],
 ];
 

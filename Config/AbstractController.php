@@ -4,9 +4,9 @@ namespace Config;
 
 use src\Model;
 
-abstract class AbstractController{
-
-    protected function render($file,$args=[])
+abstract class AbstractController
+{
+    protected function render($file, $args = [])
     {
         //foreach($args as $key=>$value)${$key} = $value;
         extract($args);

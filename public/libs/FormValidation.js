@@ -4,6 +4,10 @@ class FormValidation {
     checked = true;
     errors = {};
 
+    /**
+     * create one FormValidation
+     * @param {string} formId id of tag form
+     */
     constructor(formId) {
         this.formId = formId;
     }
@@ -92,6 +96,63 @@ class MaxLengthValidator extends Validator {
         this.dom = document.querySelector("[name='" + this.name + "']");
         if (this.dom.value === null) return false;
         if (String(this.dom.value).length > this.number) return false;
+        return true;
+    }
+}
+
+class MinLengthValidator extends Validator {
+    /**
+     * create a MaxLengthValidator
+     * @param {string} name 
+     * @param {number} number
+     * @param {string} [message = ""] message 
+     */
+    constructor(name, number, message) {
+        super("minlength", name, message);
+        this.number = number;
+    }
+
+    isValidated() {
+        this.dom = document.querySelector("[name='" + this.name + "']");
+        if (this.dom.value === null) return false;
+        if (String(this.dom.value).length < this.number) return false;
+        return true;
+    }
+}
+
+class EmailValidator extends Validator {
+    /**
+     * create a EmailValidator
+     * @param {string} name 
+     * @param {string} [message = ""] message 
+     */
+    constructor(name, message) {
+        super("email", name, message);
+    }
+
+    isValidated() {
+        this.dom = document.querySelector("[name='" + this.name + "']");
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!this.dom.value.match(validRegex)) return false;
+        return true;
+    }
+}
+
+class RegexValidator extends Validator {
+    /**
+     * create a EmailValidator
+     * @param {string} name 
+     * @param {string} regex
+     * @param {string} [message = ""] message 
+     */
+    constructor(name, regex, message) {
+        super("email", name, message);
+        this.regex = regex;
+    }
+
+    isValidated() {
+        this.dom = document.querySelector("[name='" + this.name + "']");
+        if (!this.dom.value.match(this.regex)) return false;
         return true;
     }
 }

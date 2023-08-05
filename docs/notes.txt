@@ -17,6 +17,15 @@ https://www.cnblogs.com/cq1715584439/p/11256433.html
 3.site 
 https://www.pinterest.fr/
 https://www.youtube.com/
+page de profil : https://www.pinterest.fr/settings#profile
 
 ---sqlite 
 UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'table_name';
+
+---editor
+https://github.com/JefMari/awesome-wysiwyg-editors#standalone
+ckeditor
+https://cdn.ckeditor.com/
+
+---cropper.js
+https://juejin.cn/post/7229492628872806455

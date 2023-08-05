@@ -17,13 +17,17 @@ class AdminUserController extends AbstractController{
     public function getAllUsers()
     {
         $response = [
-            "status" => 1,
+            "status" => -1,
             "data" => []
         ];
-        
-        $model = $this->getModel(User::class);
-        $allUsers = $model->findAll();
-        $response["data"] = $model->adjustUsers($allUsers);
+
+        $request = new Request();
+        if($request->isXmlHttpRequest()) {
+            $response["status"] = 1;
+            $model = $this->getModel(User::class);
+            $allUsers = $model->findAll();
+            $response["data"] = $model->adjustUsers($allUsers);
+        }
 
         $this->json($response);
     }
@@ -31,52 +35,55 @@ class AdminUserController extends AbstractController{
     public function editUser()
     {
         $response = [
-            "status" => 1,
+            "status" => -1,
             "data" => null
         ];
 
         $request = new Request();
-        $form = $request->content; 
-        $params = [
-            ":email" => $form["email"],
-            ":firstname" => $form["firstname"],
-            ":lastname" => $form["lastname"],
-            ":photo" => $form["photo"],
-            ":roles" => json_encode($form["roles"])
-        ];
-        $model = $this->getModel(User::class);
-        $foundUsers = $model->findByEmail($form["email"]);
-        if($form["id"] === null){
-            if(count($foundUsers) > 0){
-                $response = [
-                    "status" => 2,
-                    "data" => null,
-                    "message" => "Il existe un utilisateur avec ce mail"
-                ];
-                $this->json($response);
+        if($request->isXmlHttpRequest()) {
+            $response["status"] = 1;
+            $form = $request->content; 
+            $params = [
+                ":email" => $form["email"],
+                ":firstname" => $form["firstname"],
+                ":lastname" => $form["lastname"],
+                ":photo" => $form["photo"],
+                ":roles" => json_encode($form["roles"])
+            ];
+            $model = $this->getModel(User::class);
+            $foundUsers = $model->findByEmail($form["email"]);
+            if($form["id"] === null){
+                if(count($foundUsers) > 0){
+                    $response = [
+                        "status" => 2,
+                        "data" => null,
+                        "message" => "Il existe un utilisateur avec ce mail"
+                    ];
+                    $this->json($response);
 
-                return;
+                    return;
+                }
+
+                $pau = new PasswordAuthenticatedUser($_ENV["jwt_key"]);
+                $params[":password"] = $pau->hash("aaaaaaaa");
+                $id = $model->insert($params);
+            } else {
+                if(count($foundUsers) > 0 && $foundUsers[0]["id"] !== $form["id"]){
+                    $response = [
+                        "status" => 2,
+                        "data" => null,
+                        "message" => "Il existe un utilisateur avec ce mail"
+                    ];
+                    $this->json($response);
+
+                    return;
+                }
+                $id = $form["id"];
+                $model->update($id, $params);
             }
-
-            $pau = new PasswordAuthenticatedUser($_ENV["jwt_key"]);
-            $params[":password"] = $pau->hash("aaaaaaaa");
-            $id = $model->insert($params);
-        } else {
-            if(count($foundUsers) > 0 && $foundUsers[0]["id"] !== $form["id"]){
-                $response = [
-                    "status" => 2,
-                    "data" => null,
-                    "message" => "Il existe un utilisateur avec ce mail"
-                ];
-                $this->json($response);
-
-                return;
-            }
-            $id = $form["id"];
-            $model->update($id, $params);
+            $user = $model->findById($id);
+            $response["data"] = $model->adjustUser($user);
         }
-        $user = $model->findById($id);
-        $response["data"] = $model->adjustUser($user);
 
         $this->json($response);
     }
@@ -84,12 +91,16 @@ class AdminUserController extends AbstractController{
     public function deleteUser(int $id)
     {
         $response = [
-            "status" => 1,
+            "status" => -1,
             "data" => null
         ];
         
-        $this->getModel(User::class)->delete($id);
-
+        $request = new Request();
+        if($request->isXmlHttpRequest()) {
+            $response["status"] = 1;
+            $this->getModel(User::class)->delete($id);
+        }
+        
         $this->json($response);
     }
 

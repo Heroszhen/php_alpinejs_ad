@@ -40,7 +40,7 @@
                                 <div class="col-12 mb-3">
                                     <div class="mb-2">
                                         <label for="formFile" class="form-label">Vignette*</label>
-                                        <input class="form-control" type="file" name="thumbnail" id="formFile" @change="inputFileHandler($event)">
+                                        <input class="form-control" type="file" name="thumbnail" id="formFile" @change="inputFileHandler($event)" x-ref="inputFile">
                                     </div>
                                     <template x-if="formValidation.errors?.thumbnail?.required != undefined">
                                         <div class="alert alert-danger mt-1" x-text="formValidation.errors.thumbnail.required"></div>

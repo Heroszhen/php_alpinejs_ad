@@ -57,55 +57,66 @@ video {
 }
 
 
-#login>div {
+.login-logup>div {
     overflow: hidden;
     width: 50%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#login img {
+.login-logup img {
     width: 100%;
     height: auto;
 }
 
-#login form {
-    width: 70%;
+.login-logup form {
+    width: 80%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 20px 10px;
 }
 
 @media (max-width:767px) {
-    #login {
+    .login-logup {
         position: relative;
     }
 
-    #login h1 {
+    .login-logup h1 {
         color: rgba(255, 255, 255, .5);
     }
 
-    #login>div {
+    .login-logup>div {
         width: 100%;
         height: 100vh;
     }
 
-    #login>div:nth-child(2) {
+    .login-logup>div:nth-child(2) {
         position: absolute;
         z-index: -1;
     }
 
-    #login input {
+    .login-logup input:focus,
+    /* .login-logup input:not(:placeholder-shown), */
+    .login-logup input {
         background: transparent;
     }
 
-    #login label,
-    #login input::placeholder {
+    .login-logup label,
+    .login-logup input::placeholder {
         font-weight: bold;
         color: gray;
     }
 
-    #login img {
+    .login-logup img {
         height: 100%;
         width: auto;
+    }
+
+    #logup img {
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -302,6 +313,46 @@ video {
     }
 }
 
+#profile {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#profile #section-menus .menu {
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#profile #section-menus .menu.active>span {
+    font-weight: bold;
+    border-bottom: 3px solid black;
+    padding-bottom: 5px;
+}
+
+#profile #section-content {
+    overflow-x: hidden;
+}
+
+#profile .content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media (min-width:768px) {
+    #profile #section-content {
+        max-height: calc(100vh - 20px);
+        overflow-y: auto;
+    }
+}
+
+@media (max-width:767px) {
+    #profile #section-content {
+        margin-top: 20px;
+    }
+}
+
+
 /*pinterest*/
 .pinterest {
     z-index: 5;
@@ -412,12 +463,12 @@ video {
 
 @media (min-width:768px) {
     #admin-videos #section-video>div:nth-child(2) {
-        padding: 10px 100px;
+        padding: 10px 50px;
     }
 }
 
 @media (min-width:1204px) {
     #admin-videos #section-video>div:nth-child(2) {
-        padding: 10px 150px;
+        padding: 10px 170px;
     }
 }

@@ -9,7 +9,8 @@ use vendor\framework\Request;
 use vendor\JWT\JWT;
 use src\Service\JWTService;
 
-class SecurityController extends AbstractController{
+class SecurityController extends AbstractController
+{
     public function login()
     {
         return $this->render("security/login.php");
@@ -53,25 +54,61 @@ class SecurityController extends AbstractController{
             "data" => null,
         ];
 
-        $model = $this->getModel(User::class);
         $request = new Request();
-        $auth = $request->getAuthorization();
-        $jwtService = new JWTService();
-        $token = $jwtService->extractToken($auth);
-        $user = $jwtService->getUserByToken($token);
-        if($user !== null){
-            $response = [
-                "status" => 1,
-                "data" => [
-                    "email" => $user["email"],
-                    "firstname" => $user["firstname"],
-                    "roles" => $user["roles"],
-                    "photo" => $user["photo"],
-                ],
-            ];
+        if($request->isXmlHttpRequest()) {
+            $model = $this->getModel(User::class);
+            $auth = $request->getAuthorization();
+            $jwtService = new JWTService();
+            $token = $jwtService->extractToken($auth);
+            $user = $jwtService->getUserByToken($token);
+            if($user !== null){
+                $response = [
+                    "status" => 1,
+                    "data" => [
+                        "email" => $user["email"],
+                        "firstname" => $user["firstname"],
+                        "roles" => $user["roles"],
+                        "photo" => $user["photo"],
+                    ],
+                ];
+            }
         }
 
         $this->json($response);
     }
 
+    public function logup()
+    {
+        return $this->render("security/logup.php");
+    }
+
+    public function traitLogup()
+    {
+        $response = [
+            "status" => 0,
+            "data" => null
+        ];
+
+        $request = new Request();
+        if ($request->isXmlHttpRequest()) {
+            $form = $request->content;
+            $model = $this->getModel(User::class);
+            $found = $model->findByEmail($form["email"]);
+            if (count($found) === 0) {
+                $response["status"] = 1;
+                $pau = new PasswordAuthenticatedUser($_ENV['jwt_key']);
+                $model->insert([
+                    ":email" => $form["email"],
+                    ":password" => $pau->hash($form["password"]),
+                    ":lastname" => $form["lastname"],
+                    ":firstname" => $form["firstname"],
+                    ":roles" => json_encode(["role_user"])
+                ]);
+            } else {
+                $response["status"] = 2;
+            } 
+        }
+
+        $this->json($response);
+    }
 }

@@ -12,7 +12,7 @@
         </div>
         <template x-if="connected == true && profile != null">
             <div class="menu">
-                <a class="<?= $_SERVER["REQUEST_URI"] === '/profile' ? 'active' : '' ?>">Profil</a>
+                <a href="/profil" class="<?= $_SERVER["REQUEST_URI"] === '/profil' ? 'active' : '' ?>">Profil</a>
             </div>
         </template>
         <template x-if="connected == true && profile != null && profile['roles'].includes('role_admin')">
@@ -27,7 +27,7 @@
         </template>
         <template x-if="connected == false">
             <div class="menu">
-                <a href="/">Inscription</a>
+                <a href="/logup">Inscription</a>
             </div>
         </template>
         <template x-if="connected == true">

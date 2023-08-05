@@ -27,7 +27,7 @@
       if(
         strpos($_SERVER["REQUEST_URI"], "profil") === false && 
         strpos($_SERVER["REQUEST_URI"], "admin") === false &&
-        !in_array($_SERVER["REQUEST_URI"], ["/login", "/maintenance"])
+        !in_array($_SERVER["REQUEST_URI"], ["/login", "/maintenance", "/logup"])
       )
         {
         require_once "../View/home/nav.php";

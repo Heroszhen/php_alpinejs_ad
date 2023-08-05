@@ -6,9 +6,10 @@ use Config\AbstractController;
 use src\Model\Photo;
 use src\Model\Video;
 use src\Service\UtilService;
+use src\Model\User;
 
-class HomeController extends AbstractController{
-
+class HomeController extends AbstractController
+{
     public function index()
     {
         return $this->render("home/index.php",[]);
