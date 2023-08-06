@@ -96,7 +96,7 @@ class CrossOrigin
             $request = new Request();
             $cross = null;
             foreach ($tab as $key => $item) {
-                if (('*' === $key || $key === $request->origin) ||
+                if (('*' === $key || $key === $request->origin) &&
                     in_array($request->method, $item['methods'])
                 ) {
                     if ($sendHeaders) {

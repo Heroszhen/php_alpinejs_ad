@@ -29,12 +29,6 @@ document.addEventListener('alpine:init', () => {
             this.videoM = new Video();
             this.dataTable = new DataTable("tableVideos", 4);
             this.formValidation = new FormValidation("form-video");
-            this.formValidation.addValidators([
-                new RequiredValidator("title", "Le titre est obligatoire"),
-                new RequiredValidator("url", "L'url est obligatoire"),
-                new RequiredValidator("thumbnail", "La photo est obligatoire"),
-                new RequiredValidator("type", "Le type est obligatoire")
-            ]);
         },
         async getAllVideos() {
             let res = await fetchGet("/admin/videos/videos", localStorage.getItem('token'));
@@ -51,7 +45,27 @@ document.addEventListener('alpine:init', () => {
                 this.videoM['thumbnail'] = await readFile(file);
             }
         },
+        setValidators() {
+            this.formValidation = new FormValidation("form-video");
+            if (this.videoM !== null) {
+                if (this.videoM["id"] === null) {
+                    this.formValidation.addValidators([
+                        new RequiredValidator("title", "Le titre est obligatoire"),
+                        new RequiredValidator("url", "L'url est obligatoire"),
+                        new RequiredValidator("type", "Le type est obligatoire"),
+                        new RequiredValidator("thumbnail", "La photo est obligatoire")
+                    ]);
+                } else {
+                    this.formValidation.addValidators([
+                        new RequiredValidator("title", "Le titre est obligatoire"),
+                        new RequiredValidator("url", "L'url est obligatoire"),
+                        new RequiredValidator("type", "Le type est obligatoire")
+                    ]);
+                }
+            }
+        },
         async sendForm() {
+            this.setValidators();
             this.formValidation.check();
             if (this.formValidation.checked === true) {
                 if (this.videoM["id"] === null) {
