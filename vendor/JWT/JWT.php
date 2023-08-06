@@ -20,9 +20,13 @@ class JWT
         return $this->prefix . $token;
     }
 
-    public function decryptToken(string $token): array
+    public function decryptToken(string $token): ?array
     {
         $tab = explode(".", $token);
+        if ("{$tab[0]}.$tab[1]." !== $this->prefix) {
+            return null;
+        }
+
         $decrypted = $this->decrypt(end($tab), $this->key);
 
         return json_decode($decrypted, true);

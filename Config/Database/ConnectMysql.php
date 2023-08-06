@@ -9,7 +9,7 @@ class ConnectMysql{
     private function __construct() {}
 
     public static function getPDO(){
-        $infoDB = include dirname(__DIR__,2).'/Config/Config.php';
+        $infoDB = include dirname(__DIR__, 2).'/Config/Config.php';
         if (self::$pdo === null) {
             $db = dirname(__DIR__,2)."/DB/{$infoDB['dbname']}";
             $pdo = new PDO("sqlite:" . $db);

@@ -29,8 +29,8 @@ class UserController extends AbstractController
             $jwtService = new JWTService();
             $token = $jwtService->extractToken($auth);
             $user = $jwtService->getUserByToken($token);
-            unset($user["password"], $user["roles"]);
             if ($user !== null) {
+                unset($user["password"], $user["roles"]);
                 $response = [
                     "status" => 1,
                     "data" =>  UtilService::purifyOneFetchAll($user),
@@ -69,6 +69,30 @@ class UserController extends AbstractController
                         ":photo" => $form["photo"]
                     ]);
                 }  
+            }
+        }
+
+        $this->json($response);
+    }
+
+    /**
+     * check token for site : jolies-filles.yangzhen.tech
+     */
+    public function checkToken_mk(): void
+    {
+        $response = [
+            "status" => 0,
+            "data" => null,
+        ];
+
+        $request = new Request();
+        if ($request->isXmlHttpRequest()) {
+            $auth = $request->getAuthorization();
+            $jwtService = new JWTService();
+            $token = $jwtService->extractToken($auth);
+            $user = $jwtService->getUserByToken($token);
+            if (null !== $user) {
+                $response["status"] = 1;
             }
         }
 

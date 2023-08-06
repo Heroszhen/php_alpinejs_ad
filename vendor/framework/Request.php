@@ -8,6 +8,8 @@ class Request
     public $files;
     public $request;
     public $query;
+    public $origin;
+    public $method;
 
     public function __construct()
     {
@@ -15,6 +17,8 @@ class Request
         $this->content = json_decode(file_get_contents("php://input"), true);
         $this->request = $_POST;
         $this->query = $_GET;
+        $this->origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : null;
+        $this->method = $_SERVER['REQUEST_METHOD'];
     }
 
     public function isXmlHttpRequest(): bool

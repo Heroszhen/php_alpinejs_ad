@@ -7,12 +7,12 @@ use src\Service\JWTService;
 class Router{
     private $routes = [];
 
-    public function setRoutes()
+    public function setRoutes(): void
     {
         $this->routes = include dirname(__DIR__).'/Config/Routes.php';
     }
 
-    public function getRouter()
+    public function getRouter(): void
     {
         $method = $_SERVER["REQUEST_METHOD"];
         $url = $_SERVER["REQUEST_URI"];
@@ -24,12 +24,12 @@ class Router{
                 header("Location: /maintenance");
             } 
         } 
-
+        
         $index = $this->searchRoute($method, $url);
-        if($index != -1){
+        if ($index != -1) {
             $route = $this->routes[$index];
             $parameters = [];
-            if(count($route[2]) > 0){
+            if (count($route[2]) > 0) {
                 $tab = explode('/',$url);
                 $last = array_pop($tab);
                 $tab = explode("_",$last);
@@ -72,27 +72,27 @@ class Router{
     public function checkAccess(string $url): void
     {
         $request = new Request();
-        if($request->isXmlHttpRequest()) {
-            if(
+        if ($request->isXmlHttpRequest()) {
+            if (
                 strpos($url, "/profile") === false && 
                 strpos($url, "/admin") === false
-            ){
+            ) {
                 return;
             }
             $rights = include dirname(__DIR__).'/Config/security.php';
             $auth = $request->getAuthorization();
             $jwtService = new JWTService();
             $token = $jwtService->extractToken($auth);
-            if($token === ""){
+            if ($token === "") {
                 $this->sendErrorResponse();
             }
             $user = $jwtService->getUserByToken($token);
-            if($user === null){
+            if ($user === null) {
                 $this->sendErrorResponse();
             }
-            foreach($rights as $key => $right){
+            foreach ($rights as $key => $right) {
                 $cutUrl = substr($url, 0, strlen($key));
-                if($key === $cutUrl){
+                if ($key === $cutUrl) {
                     $result = array_intersect($right, $user["roles"]);
                     if(count($result) === 0){
                         $this->sendErrorResponse();
@@ -105,6 +105,7 @@ class Router{
     private function sendErrorResponse():void
     {
         echo json_encode(['status' => -1]);
+
         exit;
     }
 }

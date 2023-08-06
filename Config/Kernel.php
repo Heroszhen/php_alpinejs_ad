@@ -3,10 +3,17 @@ namespace Config;
 
 use Config\Router;
 use Config\Database\ConnectMysql;
+use PDO;
+use vendor\framework\Request;
+use vendor\framework\CrossOrigin;
 
 class Kernel{
 
-    public function run(){
+    public function run(): void
+    {
+        $cross = new CrossOrigin();
+        $cross->checkOrigin();
+
         $this->setEnv();
 
         $router = new Router();
@@ -14,16 +21,17 @@ class Kernel{
         $router->getRouter();
     }
 
-    public function getPDO(){
+    public function getPDO(): ?PDO
+    {
         return ConnectMysql::getPDO();
     }
 
-    private function setEnv()
+    private function setEnv(): void
     {
         $envs = ["env.local.php", "env.php"];
         foreach ($envs as $env) {
             if (file_exists(dirname(__DIR__, 1) . "/{$env}")) {
-                $tab = include dirname(__DIR__, 1)."/env.php";
+                $tab = include_once dirname(__DIR__, 1)."/env.php";
                 foreach($tab as $key => $value){
                     $_ENV[$key] = $value;
                 }

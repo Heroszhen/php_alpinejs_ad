@@ -17,6 +17,7 @@ return [
     ['GET', '/profil', [], Controller\UserController::class, "displayProfil"],
     ['GET', '/profile/user', [], Controller\UserController::class, "getUser"],
     ['POST', '/profile/user', [], Controller\UserController::class, "editUser"],
+    ['GET', '/profile/check-login', [], Controller\UserController::class, "checkToken_mk"],
     ['GET', '/admin/utilisateurs', [], Admin\AdminUserController::class, "index"],
     ['GET', '/admin/users', [], Admin\AdminUserController::class, "getAllUsers"],
     ['POST', '/admin/users/user', [], Admin\AdminUserController::class, "editUser"],

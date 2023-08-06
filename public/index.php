@@ -1,5 +1,4 @@
 <?php
-
 require_once "../autoload.php";
 require_once "../vendor/framework/util.php";
 
@@ -9,4 +8,3 @@ session_start();
 
 $kernel = new Kernel();
 $kernel->run();
-

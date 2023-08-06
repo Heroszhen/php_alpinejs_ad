@@ -25,19 +25,22 @@ class JWTService
     {
         $jwt = new JWT($_ENV["jwt_key"]);
         $decrypted = $jwt->decryptToken($token);
+        if (null === $decrypted) {
+            return null;
+        }
 
         $logintime = (new \DateTime($decrypted["date"]))->format("Y-m-d H:i:s");
         $now = (new \DateTime())->format("Y-m-d H:i:s");
         $logintime = strtotime($logintime);
         $now = strtotime($now);
         $days = abs($now - $logintime)/(60 * 60 * 24);
-        if($days >= 1){
+        if ($days >= 1) {
             return null;
         }
         
         $userM = new User();
         $found = $userM->findByEmail($decrypted["email"]);
-        if(count($found) > 0){
+        if (count($found) > 0) {
             $user = $found[0];
             $user["roles"] = json_decode($user["roles"], true);
             return $user;
