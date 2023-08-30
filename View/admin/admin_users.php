@@ -80,7 +80,7 @@
                     <div class="col-12 mb-2">
                         <div class="row justify-content-between">
                             <div class="col-6 col-md-5 col-lg-4">
-                                <input type="text" class="form-control" placeholder="nom, prénom" @keyup="searchByKeywords($event)">
+                                <input type="text" class="form-control" placeholder="nom, prénom, mail" @keyup="searchByKeywords($event)">
                             </div>
                             <div class="col-6 col-md-3 text-end">
                                 <button type="button" class="btn btn-success" @click="switchFormSection(1)">Ajouter</button>
@@ -122,8 +122,9 @@
                                         </td>
                                         <td x-text="item['created']"></td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-sm me-2" @click="switchFormSection(1, index)">Modifier</button>
-                                            <button type="button" class="btn btn-danger btn-sm" @click="deleteuser(index)">Supprimer</button>
+                                            <button type="button" class="btn btn-info text-white btn-sm me-2 mb-1" @click="switchFormSection(1, index)">Modifier</button>
+                                            <button type="button" class="btn btn-danger btn-sm me-2 mb-1" @click="deleteuser(index)">Supprimer</button>
+                                            <button type="button" class="btn btn-warning btn-sm text-white" @click="changePassword(index)">Mot de passe</button>
                                         </td>
                                     </tr>
                                 </template>

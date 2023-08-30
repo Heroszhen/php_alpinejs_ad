@@ -2,8 +2,8 @@
 
 namespace src\Service;
 
-class UtilService {
-
+class UtilService 
+{
     public static function purifyOneFetchAll(array $tab): array 
     {
         foreach ($tab as $key => $value) {
@@ -24,5 +24,22 @@ class UtilService {
         return $tab;
     }
 
+    public function sendByHostingerMail(
+        string $to,
+        string $subject,
+        string $message
+    ): int
+    {
+        if ($_ENV['env'] === 'dev') {
+            ini_set('display_errors', 1);
+            error_reporting( E_ALL );
+        }
+        
+        $subject = "Essai de PHP Mail";
+        $headers = "De :{$_ENV['reset-password@alexandra-daddario.yangzhen.tech']}";
+        $result = mail($to, $subject, $message, $headers);
+
+        return $result;
+    }
     
 }

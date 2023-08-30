@@ -28,7 +28,7 @@ document.addEventListener('alpine:init', () => {
             for (let entry of this.allUsers) {
                 entry["filter"] = "false";
                 for (let index in entry) {
-                    if (["lastname", "firstname"].includes(index)) {
+                    if (["lastname", "firstname", "email"].includes(index)) {
                         if (entry[index].toLowerCase().includes(value)) {
                             entry["filter"] = "";
                             break;
@@ -112,6 +112,16 @@ document.addEventListener('alpine:init', () => {
             if (res["status"] === -1) window.location.href = "/";
             else if (res["status"] === 1) {
                 this.allUsers.splice(index, 1);
+            }
+        },
+        async changePassword(index) {
+            let result = prompt("Nouveau mot de passe", "");
+            if (result !== null && result !== "") {
+                let res = await fetchPost(`/admin/users/change-password/${this.allUsers[index]['id']}`, {"password": result}, localStorage.getItem('token'));
+                if (res["status"] === -1) window.location.href = "/";
+                else if (res["status"] === 1) {
+                    alert("Enregistré");
+                }
             }
         }
     }));

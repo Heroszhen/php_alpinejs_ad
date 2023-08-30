@@ -15,7 +15,7 @@
         </div>
         <template x-if="connected == true">
             <div class="menu">
-                <a class="pointer" href="<?= $_ENV['mk_joliesfilles'] ?>" target="_blank">Jolies Filles</a>
+                <a class="pointer" :href="getToken()" target="_blank">Jolies Filles</a>
             </div>
         </template>
         <template x-if="connected == true && profile != null">
@@ -50,5 +50,6 @@
             </div>
         </template>
     </div>
+    <div class="d-none" data-url="<?= $_ENV['mk_joliesfilles'] ?>" x-ref="urlMK"></div>
 </nav>
 

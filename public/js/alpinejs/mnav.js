@@ -21,6 +21,9 @@ document.addEventListener('alpine:init', () => {
                     location.reload();
                 }
             }
+        },
+        getToken() {
+            return this.$refs.urlMK.dataset.url + "/tailwindcss/" + localStorage.getItem("token");
         }
     }));
 });

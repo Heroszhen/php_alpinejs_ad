@@ -92,7 +92,18 @@ class UserController extends AbstractController
             $token = $jwtService->extractToken($auth);
             $user = $jwtService->getUserByToken($token);
             if (null !== $user) {
-                $response["status"] = 1;
+                if (isset($request->headers['X-Request-Action']) && 'token' === $request->headers['X-Request-Action']) {
+                    $response['status'] = 1;
+                } else {
+                    $response = [
+                        'status' => 1,
+                        'data' => [
+                            'id' => $user['id'],
+                            'firstname' => $user['firstname'],
+                            'photo' => $user['photo']
+                        ]
+                    ];
+                }
             }
         }
 

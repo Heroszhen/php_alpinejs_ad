@@ -14,8 +14,9 @@
                 <label for="password" class="form-label">Mot de passe*</label>
                 <input type="password" class="form-control" id="password" placeholder="mot de passe" autocomplete="on" x-model="loginM['password']">
             </div>
-            <div class="text-center">
+            <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Envoyer</button>
+                <a class="btn btn-outline-info" href="/mot-de-passe-oublie">Mot de passe oublié?</a>
             </div>
         </form>
     </div>

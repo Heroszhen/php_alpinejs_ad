@@ -104,4 +104,23 @@ class AdminUserController extends AbstractController{
         $this->json($response);
     }
 
+    public function changePassword(int $id) {
+        $response = [
+            "status" => -1,
+            "data" => null
+        ];
+
+        $request = new Request();
+        if($request->isXmlHttpRequest()) {
+            $response["status"] = 1;
+            $form = $request->content; 
+            $pau = new PasswordAuthenticatedUser($_ENV["jwt_key"]);
+            $params[":password"] = $pau->hash($form["password"]);
+            $model = $this->getModel(User::class);
+            $model->update($id, $params);
+        }
+
+        $this->json($response);
+    }
+
 }

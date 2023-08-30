@@ -64,4 +64,12 @@ class HomeController extends AbstractController
 
         $this->json($response);
     }
+
+    public function forgottenPassword()
+    {
+        
+        $this->render("home/forgotten_password.php", [
+
+        ]);
+    }
 }
