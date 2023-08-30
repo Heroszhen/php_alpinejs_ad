@@ -3,6 +3,7 @@ namespace Config;
 
 use vendor\framework\Request;
 use src\Service\JWTService;
+use vendor\framework\Logger;
 
 class Router{
     private $routes = [];
@@ -16,6 +17,8 @@ class Router{
     {
         $method = $_SERVER["REQUEST_METHOD"];
         $url = $_SERVER["REQUEST_URI"];
+
+        $this->setRouteLogs($method, $url);
 
         $this->checkAccess($url);
 
@@ -39,7 +42,7 @@ class Router{
         }
     }
 
-    public function searchRoute(string $method, string $url):int
+    public function searchRoute(string $method, string $url): int
     {
         $index = -1;
         foreach($this->routes as $key=>$value){
@@ -69,7 +72,7 @@ class Router{
         return $index;
     }
 
-    public function checkAccess(string $url): void
+    private function checkAccess(string $url): void
     {
         $request = new Request();
         if ($request->isXmlHttpRequest()) {
@@ -102,10 +105,15 @@ class Router{
         }
     }
 
-    private function sendErrorResponse():void
+    private function sendErrorResponse(): void
     {
         echo json_encode(['status' => -1]);
 
         exit;
+    }
+
+    private function setRouteLogs(string $method, string $url): void
+    {
+        (new Logger())->write(dirname(__DIR__) . "/var/{$_ENV['env']}.log", Logger::TYPE_INFO, "{$method} : {$url}");
     }
 }
