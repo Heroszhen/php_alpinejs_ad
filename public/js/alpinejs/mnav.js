@@ -23,7 +23,7 @@ document.addEventListener('alpine:init', () => {
             }
         },
         getToken() {
-            return this.$refs.urlMK.dataset.url + "/tailwindcss/" + localStorage.getItem("token");
+            return this.$refs.urlMK.dataset.url + "/tailwindcss?token=" + localStorage.getItem("token");
         }
     }));
 });
